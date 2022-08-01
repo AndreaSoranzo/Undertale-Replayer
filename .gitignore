@@ -1,5 +1,5 @@
 *.txt
-settings/*.ini
+settings/
 SaveList/
 .vscode/
 img/original/
