@@ -1,4 +1,5 @@
 *.txt
+settings/*.ini
 SaveList/
 .vscode/
 img/original/
