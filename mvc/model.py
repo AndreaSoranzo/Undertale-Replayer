@@ -2,6 +2,7 @@ from configparser import ConfigParser
 
 import shutil as cmd
 import os
+import sys
 
 
 class Model:
@@ -10,19 +11,39 @@ class Model:
 
     USERSAVE_NAME = "previoussaveiles"
 
-    # 0->Name/1->Image_Path/2->Save_Path
-    BOSS_LIST = {
-        0: ["Toriel", "img/toriel.png", "saves/toriel"],
-        1: ["Papyrus", "img/papyrus.png", "saves/papyrus"],
-        2: ["Undyne", "img/undyne.png", "saves/undyne"],
-        3: ["Mettaton Ex", "img/mettaton.png", "saves/mettaton"],
-        4: ["Muffet", "img/muffet.png", "saves/muffet"],
-        5: ["Asgore", "img/asgore.png", "saves/asgore"],
-        6: ["Omega Flowey", "img/flowey.png", "saves/flowey"],
-        7: ["Asriel Dreemurr", "img/asriel.png", "saves/asriel"],
-        8: ["Undyne the Undying", "img/undyneu.png", "saves/undyneu"],
-        9: ["Sans", "img/sans.png", "saves/sans"]
-    }
+    try:
+
+        ICON_PATH = sys._MEIPASS+"/img/icon.ico"
+
+        # 0->Name/1->Image_Path/2->Save_Path
+        BOSS_LIST = {
+            0: ["Toriel", sys._MEIPASS+"/img/toriel.png", sys._MEIPASS+"/saves/toriel"],
+            1: ["Papyrus", sys._MEIPASS+"/img/papyrus.png", sys._MEIPASS+"/saves/papyrus"],
+            2: ["Undyne", sys._MEIPASS+"/img/undyne.png", sys._MEIPASS+"/saves/undyne"],
+            3: ["Mettaton Ex", sys._MEIPASS+"/img/mettaton.png", sys._MEIPASS+"/saves/mettaton"],
+            4: ["Muffet", sys._MEIPASS+"/img/muffet.png", sys._MEIPASS+"/saves/muffet"],
+            5: ["Asgore", sys._MEIPASS+"/img/asgore.png", sys._MEIPASS+"/saves/asgore"],
+            6: ["Omega Flowey", sys._MEIPASS+"/img/flowey.png", sys._MEIPASS+"/saves/flowey"],
+            7: ["Asriel Dreemurr", sys._MEIPASS+"/img/asriel.png", sys._MEIPASS+"/saves/asriel"],
+            8: ["Undyne the Undying", sys._MEIPASS+"/img/undyneu.png", sys._MEIPASS+"/saves/undyneu"],
+            9: ["Sans", sys._MEIPASS+"/img/sans.png", sys._MEIPASS+"/saves/sans"]
+        }
+    except:
+        ICON_PATH = "img/icon.ico"
+
+        # 0->Name/1->Image_Path/2->Save_Path
+        BOSS_LIST = {
+            0: ["Toriel", "img/toriel.png", "saves/toriel"],
+            1: ["Papyrus", "img/papyrus.png", "saves/papyrus"],
+            2: ["Undyne", "img/undyne.png", "/saves/undyne"],
+            3: ["Mettaton Ex", "img/mettaton.png", "/saves/mettaton"],
+            4: ["Muffet", "img/muffet.png", "saves/muffet"],
+            5: ["Asgore", "img/asgore.png", "saves/asgore"],
+            6: ["Omega Flowey", "img/flowey.png", "saves/flowey"],
+            7: ["Asriel Dreemurr", "img/asriel.png", "saves/asriel"],
+            8: ["Undyne the Undying", "img/undyneu.png", "saves/undyneu"],
+            9: ["Sans", "img/sans.png", "saves/sans"]
+        }
 
     def __init__(self, callback):
         self.Err_callback = callback
@@ -106,6 +127,9 @@ class Model:
             data[2] = "1\n"
             file0.truncate()
             file0.writelines(data)
+
+    def GetIconPath(self):
+        return self.ICON_PATH
 
     def GetBossList(self):
         return self.BOSS_LIST

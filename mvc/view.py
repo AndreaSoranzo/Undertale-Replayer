@@ -52,12 +52,12 @@ class View:
         messagebox.showerror(
             "Error", f"Error while restoring files\nGo to {errPath} to fix things")
 
-    def AskPaths(self):
+    def AskPaths(self, exitCallback):
         game_path = filedialog.askopenfilename(title="Select Undertale game")
         if not game_path:
-            self.Tk.destroy()
+            exitCallback()
         data_path = filedialog.askdirectory(
             title="Select Undertale data folder")
         if not data_path:
-            self.Tk.destroy()
+            exitCallback()
         return (game_path, data_path)

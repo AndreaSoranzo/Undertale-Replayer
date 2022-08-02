@@ -1,5 +1,6 @@
 from subprocess import Popen
 from atexit import register
+import sys
 from threading import Thread
 from psutil import process_iter
 from tkinter import Tk
@@ -22,11 +23,11 @@ class Controller:
         self.tk.resizable(False, False)
         self.tk.title("Underatale Raplayer")
         self.tk.configure(background="#000")
-        self.tk.iconbitmap("img/icon.ico")
+        self.tk.iconbitmap(self.model.GetIconPath())
         try:
             self.model.TrySetAppPaths()
         except:
-            settingsTuple = self.view.AskPaths()
+            settingsTuple = self.view.AskPaths(self.CloseApp)
             self.model.SetAppPaths(settingsTuple[0], settingsTuple[1])
         register(self.model.RestoreUserFiles)
         self.tk.mainloop()
@@ -55,3 +56,4 @@ class Controller:
 
     def CloseApp(self):
         self.tk.destroy()
+        sys.exit()
