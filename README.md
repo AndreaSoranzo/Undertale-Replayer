@@ -7,3 +7,5 @@ Python App made for fight Undertale bosses again
 **Step 2** : Now you have to select the boss you want to fight, insert your name and decide if you want to try NoHit mode
 
 **N.B** When Undertale is closed all your old save data will be restored
+
+All immages are taken form : https://icons8.com/icon/59222/undertale and https://undertale.fandom.com/wiki

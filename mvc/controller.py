@@ -22,6 +22,7 @@ class Controller:
         self.tk.resizable(False, False)
         self.tk.title("Underatale Raplayer")
         self.tk.configure(background="#000")
+        self.tk.iconbitmap("img/icon.ico")
         try:
             self.model.TrySetAppPaths()
         except:
