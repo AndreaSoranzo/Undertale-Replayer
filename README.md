@@ -8,4 +8,4 @@ Python App made for fight Undertale bosses again
 
 **N.B** When Undertale is closed all your old save data will be restored
 
-All immages are taken form : https://icons8.com/icon/59222/undertale and https://undertale.fandom.com/wiki
+All images are taken form : https://icons8.com/icon/59222/undertale and https://undertale.fandom.com/wiki
