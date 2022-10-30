@@ -15,7 +15,7 @@ class BossCard(Frame):
     def CreateWidgets(self):
         self.boss_image = PhotoImage(file=self.imagePath)
         Label(self, image=self.boss_image).pack(side="top", pady=20)
-        Label(self, text=self.title, style="sub.TLabel", wraplength=100,
+        Label(self, text=self.title, style="sub.TLabel", wraplength=200,
               justify="center").pack()
         Checkbutton(self, variable=self.checkVariable, onvalue=self.boss_id,
                     offvalue=-1, takefocus=False).pack(side="bottom", pady=15)

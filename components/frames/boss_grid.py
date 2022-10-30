@@ -4,12 +4,30 @@ from components.customWidgets.boss_card import BossCard
 
 
 class BossGridFrame(Frame):
-    rowCount = 0
-    reminder = 0
 
     def __init__(self, parent, listPath, items_per_row) -> None:
         super().__init__(parent)
         self.selectedValue = IntVar()
+        self.scrollSpeed = 80
+
+        self.bossScrollableCanvas = Canvas(self,width=parent.winfo_width(),height=500,background="#000",borderwidth=0, highlightthickness=0)
+        self.scrollbar = Scrollbar(self,orient="vertical", command=self.bossScrollableCanvas.yview)
+        self.bossScrollableCanvas.configure(yscrollcommand=self.scrollbar.set,yscrollincrement=40)
+
+        self.bossesGrid = Frame(self.bossScrollableCanvas)
+        self.bossScrollableCanvas.create_window((50,0), window=self.bossesGrid,anchor="nw")
+        self.bossesGrid.bind(
+            "<Configure>",
+            lambda e: self.bossScrollableCanvas.configure(
+                scrollregion=self.bossScrollableCanvas.bbox("all")
+            )
+        )
+        self.bossScrollableCanvas.bind_all(
+            "<MouseWheel>",
+            lambda e : self.bossScrollableCanvas.yview_scroll(int(-1*(e.delta/self.scrollSpeed)), 'units')
+        )
+        self.scrollbar.pack(side="right", fill="y")
+        self.bossScrollableCanvas.pack(side="left", fill="both", expand=True)
         self.listPath = listPath
         self.items_per_row = items_per_row
         self.columnconfigure(0, weight=1)
@@ -18,11 +36,8 @@ class BossGridFrame(Frame):
     def CreateWidgets(self):
 
         for i in range(len(self.listPath)):
-            reminder = i % self.items_per_row
-            if (reminder == 0):
-                self.rowCount += 1
-            BossCard(
-                self, self.listPath[i][1], self.listPath[i][0], self.selectedValue, i).grid(column=reminder, row=self.rowCount, padx=30, sticky="s")
-
+            self.reminder = i % self.items_per_row
+            self.rowCount = int(i / self.items_per_row)
+            BossCard(self.bossesGrid, self.listPath[i][1], self.listPath[i][0], self.selectedValue, i).grid(column=self.reminder, row=self.rowCount, padx=30, sticky="s")
     def GetbossID(self):
         return self.selectedValue.get()

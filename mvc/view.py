@@ -8,9 +8,8 @@ from components.frames.button import ButtonFrame
 from components.frames.settings import SettingsFrame
 from components.frames.titles import TitlesFrame
 
-_WINDOW_HEIGHT = 900
-_WINDOW_WIDTH = 900
-
+_WINDOW_HEIGHT = 1000
+_WINDOW_WIDTH = 1000 
 
 class View:
     def __init__(self, Tk, BossList, callback):
@@ -23,9 +22,10 @@ class View:
         self.Tk = Tk
         self.Tk.geometry(
             f"{_WINDOW_WIDTH}x{_WINDOW_HEIGHT}+{self.positionX}+{self.positionY}")
-
+        self.Tk.update()
         self.Tk.columnconfigure(0, weight=1)
         self.Tk.rowconfigure(1, weight=1)
+
 
         self.titles = TitlesFrame(Tk)
         self.bossGrid = BossGridFrame(Tk, BossList, 5)
