@@ -39,7 +39,7 @@ class Model:
             3: ["Mettaton Ex", "img/mettaton.png", "/saves/mettaton"],
             4: ["Muffet", "img/muffet.png", "saves/muffet"],
             5: ["Asgore", "img/asgore.png", "saves/asgore"],
-            6: ["Omega Flowey", "img/flowey.png", "saves/flowey"],
+            6: ["Omega Flowey", "img/omega.png", "saves/flowey"],
             7: ["Asriel Dreemurr", "img/asriel.png", "saves/asriel"],
             8: ["Undyne the Undying", "img/undyneu.png", "saves/undyneu"],
             9: ["Sans", "img/sans.png", "saves/sans"]

@@ -8,18 +8,19 @@ class BossGridFrame(Frame):
     def __init__(self, parent, listPath, items_per_row) -> None:
         super().__init__(parent)
         self.selectedValue = IntVar()
-        self.scrollSpeed = 80
+        self.scrollSpeed = 60
 
-        self.bossScrollableCanvas = Canvas(self,width=parent.winfo_width(),height=500,background="#000",borderwidth=0, highlightthickness=0)
+        self.bossScrollableCanvas = Canvas(self,width=parent.winfo_width(),background="#000",borderwidth=0, highlightthickness=0)
         self.scrollbar = Scrollbar(self,orient="vertical", command=self.bossScrollableCanvas.yview)
-        self.bossScrollableCanvas.configure(yscrollcommand=self.scrollbar.set,yscrollincrement=40)
+        self.bossScrollableCanvas.configure(yscrollcommand=self.scrollbar.set)
 
         self.bossesGrid = Frame(self.bossScrollableCanvas)
-        self.bossScrollableCanvas.create_window((50,0), window=self.bossesGrid,anchor="nw")
+        self.bossScrollableCanvas.create_window((5,0), window=self.bossesGrid,anchor="nw")
         self.bossesGrid.bind(
             "<Configure>",
             lambda e: self.bossScrollableCanvas.configure(
-                scrollregion=self.bossScrollableCanvas.bbox("all")
+                scrollregion=self.bossScrollableCanvas.bbox("all"),
+                height=e.height
             )
         )
         self.bossScrollableCanvas.bind_all(
