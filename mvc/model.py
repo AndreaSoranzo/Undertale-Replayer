@@ -26,7 +26,8 @@ class Model:
             6: ["Omega Flowey", sys._MEIPASS+"/img/flowey.png", sys._MEIPASS+"/saves/flowey"],
             7: ["Asriel Dreemurr", sys._MEIPASS+"/img/asriel.png", sys._MEIPASS+"/saves/asriel"],
             8: ["Undyne the Undying", sys._MEIPASS+"/img/undyneu.png", sys._MEIPASS+"/saves/undyneu"],
-            9: ["Sans", sys._MEIPASS+"/img/sans.png", sys._MEIPASS+"/saves/sans"]
+            9: ["Sans", sys._MEIPASS+"/img/sans.png", sys._MEIPASS+"/saves/sans"],
+            10: ["True Lab", sys._MEIPASS+"/img/truelab.png", sys._MEIPASS+"/saves/truelab"]
         }
     except:
         ICON_PATH = "img/icon.ico"
@@ -42,7 +43,8 @@ class Model:
             6: ["Omega Flowey", "img/omega.png", "saves/flowey"],
             7: ["Asriel Dreemurr", "img/asriel.png", "saves/asriel"],
             8: ["Undyne the Undying", "img/undyneu.png", "saves/undyneu"],
-            9: ["Sans", "img/sans.png", "saves/sans"]
+            9: ["Sans", "img/sans.png", "saves/sans"],
+            10: ["True Lab", "img/truelab.png", "saves/truelab"]
         }
 
     def __init__(self, callback):
@@ -89,9 +91,9 @@ class Model:
         inifile["DATA"] = {"Path": f"\"{data_path}\""}
         with open("settings/config.ini", "w") as config:
             inifile.write(config)
-        self.TrySetAppPaths()
+        self.ReadAppPaths()
 
-    def TrySetAppPaths(self):
+    def ReadAppPaths(self):
         try:
             inifile = ConfigParser()
             inifile.optionxform = str   # reset Case Sentitive

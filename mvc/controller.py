@@ -21,11 +21,11 @@ class Controller:
         self.CheckUndertaleProcess()
         self.tk.focus_set()
         self.tk.resizable(False, False)
-        self.tk.title("Underatale Raplayer")
+        self.tk.title("Underatale Replayer")
         self.tk.configure(background="#000")
         self.tk.iconbitmap(self.model.GetIconPath())
         try:
-            self.model.TrySetAppPaths()
+            self.model.ReadAppPaths()
         except:
             settingsTuple = self.view.AskPaths(self.CloseApp)
             self.model.SetAppPaths(settingsTuple[0], settingsTuple[1])

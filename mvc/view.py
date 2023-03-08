@@ -12,9 +12,9 @@ _WINDOW_HEIGHT = 1000
 _WINDOW_WIDTH = 1000 
 
 class View:
-    def __init__(self, Tk, BossList, callback):
+    def __init__(self, Tk, BossList, ExexCallback):
         TTKStyles().init()
-        self.Exec_callback = callback
+        self.Exec_callback = ExexCallback
         self.MONITOR_HEIGHT = Tk.winfo_screenheight()
         self.MONITOR_WIDTH = Tk.winfo_screenwidth()
         self.positionY = int(self.MONITOR_HEIGHT/2-_WINDOW_HEIGHT/2)
@@ -30,7 +30,7 @@ class View:
         self.titles = TitlesFrame(Tk)
         self.bossGrid = BossGridFrame(Tk, BossList, 5)
         self.playerSettings = SettingsFrame(Tk)
-        self.buttons = ButtonFrame(Tk, self.ButtonAction)
+        self.buttons = ButtonFrame(Tk, self.StartButtonAction)
         self.footer = FooterFrame(Tk)
 
         self.titles.grid(column=0, row=0, sticky="n", pady=10)
@@ -39,7 +39,7 @@ class View:
         self.buttons.grid(column=0, row=3, pady=30)
         self.footer.grid(column=0, row=4, sticky="s")
 
-    def ButtonAction(self):
+    def StartButtonAction(self):
         boss_id = self.bossGrid.GetbossID()
         name = self.playerSettings.GetPlayerName()
         isHit = self.playerSettings.GetHitMode()

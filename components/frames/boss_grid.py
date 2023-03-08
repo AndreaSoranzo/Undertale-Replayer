@@ -18,14 +18,14 @@ class BossGridFrame(Frame):
         self.bossScrollableCanvas.create_window((5,0), window=self.bossesGrid,anchor="nw")
         self.bossesGrid.bind(
             "<Configure>",
-            lambda e: self.bossScrollableCanvas.configure(
+            lambda event: self.bossScrollableCanvas.configure(
                 scrollregion=self.bossScrollableCanvas.bbox("all"),
-                height=e.height
+                height=event.height
             )
         )
         self.bossScrollableCanvas.bind_all(
             "<MouseWheel>",
-            lambda e : self.bossScrollableCanvas.yview_scroll(int(-1*(e.delta/self.scrollSpeed)), 'units')
+            lambda event : self.bossScrollableCanvas.yview_scroll(int(-1*(event.delta/self.scrollSpeed)), 'units')
         )
         self.scrollbar.pack(side="right", fill="y")
         self.bossScrollableCanvas.pack(side="left", fill="both", expand=True)
