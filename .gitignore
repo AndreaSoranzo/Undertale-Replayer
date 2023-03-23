@@ -3,6 +3,7 @@ settings/*.ini
 SaveList/
 .vscode/
 img/original/
+compiling
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
