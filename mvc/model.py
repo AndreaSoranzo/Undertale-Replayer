@@ -36,8 +36,8 @@ class Model:
         BOSS_LIST = {
             0: ["Toriel", "img/toriel.png", "saves/toriel"],
             1: ["Papyrus", "img/papyrus.png", "saves/papyrus"],
-            2: ["Undyne", "img/undyne.png", "/saves/undyne"],
-            3: ["Mettaton Ex", "img/mettaton.png", "/saves/mettaton"],
+            2: ["Undyne", "img/undyne.png", "saves/undyne"],
+            3: ["Mettaton Ex", "img/mettaton.png", "saves/mettaton"],
             4: ["Muffet", "img/muffet.png", "saves/muffet"],
             5: ["Asgore", "img/asgore.png", "saves/asgore"],
             6: ["Omega Flowey", "img/omega.png", "saves/flowey"],
@@ -65,7 +65,10 @@ class Model:
         if os.path.exists(self.folder_path):
             return
         os.mkdir(self.folder_path)
-        cmd.move(self.UNDERTALE_DATA_PATH+"/file0", self.folder_path)
+        try:
+            cmd.move(self.UNDERTALE_DATA_PATH+"/file0", self.folder_path)
+        except:
+            self.CreateFile(self.folder_path,"file0")
         cmd.move(self.UNDERTALE_DATA_PATH+"/undertale.ini", self.folder_path)
 
     def RestoreUserFiles(self):
@@ -82,8 +85,7 @@ class Model:
             self.Err_callback()
 
     def SetAppPaths(self, game_path, data_path):
-        with open("settings/config.ini", 'w') as f:
-            pass
+        self.CreateFile("settings","config.ini")
         inifile = ConfigParser()
         inifile.optionxform = str   # reset Case Sentitive
         inifile.read("settings/config.ini")
@@ -130,6 +132,10 @@ class Model:
             file0.truncate()
             file0.writelines(data)
 
+    def CreateFile(self,path,fileName):
+        with open(path+"/"+fileName, 'w') as f:
+            pass
+        
     def GetIconPath(self):
         return self.ICON_PATH
 

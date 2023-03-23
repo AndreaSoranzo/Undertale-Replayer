@@ -1,8 +1,9 @@
 from subprocess import Popen
 from atexit import register
 import sys
+import time
+import psutil
 from threading import Thread
-from psutil import process_iter
 from tkinter import Tk
 
 from mvc.model import Model
@@ -10,6 +11,9 @@ from mvc.view import View
 
 
 class Controller:
+
+    PROCESS_NAME = "UNDERTALE"
+    FIND_REFRESHRATE = 1.5
 
     def __init__(self):
         self.tk = Tk()
@@ -36,20 +40,26 @@ class Controller:
         self.model.SaveUserFiles()
         self.model.SetFiles(playerName, boss_id, isHit)
         undertale = Popen(self.model.GetUndertaleGamePath())
-        listenThread = Thread(target=self.ListenForClosing, args=(undertale,))
+        listenThread = Thread(target=self.ListenForClosing, args=(self.FIND_REFRESHRATE,))
         listenThread.start()
         self.CloseApp()
 
     def CheckUndertaleProcess(self):
         print("CheckUndertaleProcess")
-        for process in process_iter():
-            if "UNDERTALE" in process.name():
+        for process in psutil.process_iter():
+            if self.PROCESS_NAME in process.name():
                 self.CloseApp()
-
-    def ListenForClosing(self, app):
-        result = app.poll()
-        while (result is None):  # if is None -> app is running
-            result = app.poll()
+    
+    def ListenForClosing(self, findRefreshRate):
+        poll = None
+        while (poll == None):          
+            time.sleep(findRefreshRate) # wait undertale initialization
+            for process in psutil.process_iter():
+                if self.PROCESS_NAME in process.name():
+                    poll = process.pid
+        while (True): 
+            if not psutil.pid_exists(poll): # if it exist the undertale process still exists
+                break
 
     def ShowRestoreErrorMessage(self):
         self.view.RestoreErrorMessage(self.model.GetUndertaleDataPath())
